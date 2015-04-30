@@ -15,3 +15,7 @@ main = runSpock 8080 $ spockT id $ do
     if age < 21
        then text "You are not allowed"
        else text "Please, come in"
+  
+  -- /hello-html/:name
+  get ("hello-html" <//> var) $ \name ->
+    html ("<html><body><h1>Hello, " <> name <> "</h1></body></html>")
