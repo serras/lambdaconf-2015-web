@@ -9,6 +9,8 @@ cabal-version:       >=1.10
 
 executable ex1-json
   main-is:             Main.hs
-  build-depends:       base >= 4 && < 5
+  build-depends:       base >= 4 && < 5,
+                       Spock >= 0.7 && < 1,
+                       aeson >= 0.8 && < 1
   hs-source-dirs:      src
   default-language:    Haskell2010

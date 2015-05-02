@@ -22,6 +22,7 @@ main = runSpock 8080 $ spockT id $ do
           B.h1 $ do
             B.text "Hello "
             B.span ! A.style "color: red;" $ B.text name
+            
   -- /allow/:age
   get ("allow" <//> var) $ \(age :: Integer) ->
     if age < 21
@@ -34,4 +35,8 @@ main = runSpock 8080 $ spockT id $ do
                            allowed
                          <p>You are only #{age} years old
             |]
-       else text "Please, come in"
+       else html $ toStrict $ renderHtml $
+            [shamlet|<html>
+                       <body>
+                         <h1>Please, come in
+            |]
