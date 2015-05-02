@@ -10,3 +10,12 @@
 4. [Esqueleto](https://github.com/serras/lambdaconf-2015-web/blob/master/ex4-esqueleto.md) (advanced)
 5. [Digestive Functors](https://github.com/serras/lambdaconf-2015-web/blob/master/ex5-digestive.md)
 6. [Digestive Functors + JSON](https://github.com/serras/lambdaconf-2015-web/blob/master/ex6-digestive-aeson.md)
+
+### Running an exercise
+
+1. Open a terminal.
+2. Go to the folder corresponding to the exercise.
+3. Execute `cabal install --only-dependencies`.
+4. Execute `cabal build`.
+5. The resulting program should be on the `dist` folder, inside a folder with the name of the exercise. You can run this program to start the web server. For example, the first exercise is run with `./dist/ex1-json/ex1-json`.
+6. Open your browser of choice and point it to `http://localhost:8080`.
