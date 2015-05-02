@@ -29,7 +29,7 @@ you shall notice that the constructors correspond to the basic ways to build JSO
 
 You may have notice, however, that we haven't used the `Object` constructor in our example. Inside the library, `Object` is defined as needing a hashmap of strings to values: this is a very performant way to operate with it, but unfortunately does not provide a very nice interface for writing a JSON value as we are doing here. Instead, it is more convenient to use the `object` function, which expects a list of pairs as key-values to JSON. That is, if we want to represent the JSON value:
 
-```json
+```
 { "key1": value1, "key2": value2, ...}
 ```
 
@@ -40,3 +40,67 @@ object [ "key1" .= value1
        , "key2" .= value2
        , ...]
 ```
+
+**Task 1**: rewrite the code for the `/allow/:age` route to return either `{ "allowed": true }` or `{ "allowed": false }`.
+
+**Task 2**: the template code includes the definition of a `Person` data type and a list of people. Add a route to your Spock application of the form `/person/:n`, which returns the information of the n-th person in the list as JSON.
+
+*Hint*: to obtain the n-th element of a list, use the `(!!)` function from the `Data.List` module.
+
+## ToJSON
+
+For the second task it is quite probable that you had written a function, or a piece of code, which transforms a `Person` value into a corresponding `Value` from `aeson`. Given that this a very common operation, `aeson` defines a `ToJSON` type class. Each type which is an instance of this class has a way to be converted to JSON. For example:
+
+```haskell
+instance ToJSON Person where
+  toJSON (Person nm ag ad) = object [ "name"    .= name
+                                    , "age"     .= age
+                                    , "address" .= address
+                                    ]
+```
+
+This instance definition itself makes use of the `ToJSON` type class. Note that we didn't have to mark explicitly how to convert a string or an `Integer` to JSON: the conversion is done automatically for us when using the `(.=)` operator.
+
+The `json` function from Spock also works on any `ToJSON` value, not only of those from the `Value` type. In conclusion, task 2 can be solved with only two lines of code once you have the instances in place:
+
+```haskell
+get ("person" <//> ix) $ \ix ->
+  json $ listPeople !! ix
+```
+
+**Task 3**: create a new data type `Task` which stores a title, a description and the `Person` who is in charge of the task. Write a corresponding `ToJSON` instance. Note that you can reuse the definition for `Person` in the code for `Task`.
+
+Imagine however that your code does not include two, but dozens of data types which you might need to show to the user as JSON: what a nightmare of boilerplate code! Luckily, GHC has a feature called *generic deriving* which alleviates this problem.
+
+The first step is to make your type an instance of the `Generic` type class, which can be done automatically by the compiler. Given that generic deriving is not part of the Haskell standard, you need to enable a GHC extension. The way extensions are added to a file is via a `{-# LANGUAGE Extension #-}` line at the beginning of the source. In our case, it should read:
+
+```haskell
+{-# LANGUAGE DeriveGeneric #-}
+```
+
+Then, you need to import the `Generic` type class into scope, via:
+
+```haskell
+import GHC.Generics
+```
+
+Finally, include a `deriving` clause in your data type:
+
+```haskell
+data Person = Person { name    :: String
+                     , age     :: Integer
+                     , address :: String
+                     } deriving Generic
+```
+
+In short, being an instance of `Generic` means that the code can perform reflection on the structure of the data type. In particular, functions or instances which depend on the shape of a data type can be defined all at once for those types which are `Generic`.
+
+The class `ToJSON` is one of those type classes. Given a record definition, like that of `Person`, you can generically build a way to show the information in JSON format by using as keys the names of the records. To signal the compiler that you want that instance to be automatically generated for you, just write:
+
+```haskell
+instance ToJSON Person
+```
+
+## Conclusion
+
+In this exercise we have looked at the capabilities for creating JSON values out of Haskell values. In particular, we have looked at the generic deriving mechanism in GHC which helps us removing lots of boilerplate code.
