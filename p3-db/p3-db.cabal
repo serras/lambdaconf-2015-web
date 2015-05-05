@@ -1,4 +1,4 @@
-name:                p2-html
+name:                p3-db
 version:             0.1.0.0
 synopsis:            LambdaConf 2015 Haskell web workshop - Part 2 - HTML
 homepage:            https://github.com/serras/lambdaconf-2015-web
@@ -7,12 +7,16 @@ maintainer:          trupill@gmail.com
 build-type:          Simple
 cabal-version:       >=1.10
 
-executable p2-html
+executable p3-db
   main-is:             Main.hs
   build-depends:       base >= 4 && < 5,
                        Spock >= 0.7 && < 1,
+                       persistent >= 2.1 && < 3,
+                       persistent-template >= 2.1 && < 3,
+                       persistent-sqlite >= 2.1 && < 3,
+                       monad-logger >= 0.3 && < 0.4,
                        text,
-                       blaze-html >= 0.8 && < 1,
-                       shakespeare >= 2 && <3
+                       transformers,
+                       http-types
   hs-source-dirs:      src
   default-language:    Haskell2010
