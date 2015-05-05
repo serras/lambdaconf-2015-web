@@ -5,6 +5,7 @@ module Main where
 
 import Control.Monad.IO.Class
 import Control.Monad.Logger
+import Data.Int (Int64)
 import Data.Monoid
 import Database.Persist hiding (get)
 import Database.Persist.Sql hiding (get)
@@ -25,6 +26,8 @@ main = do
     NoLoggingT $ runSpock 8080 $ spockT id $ do
       -- small function for running db
       let withDb f = liftIO $ runSqlPersistMPool f pool
+
+      -- USERS
       -- create new user
       get ("user" <//> "new" <//> var <//> var) $ \fname lname -> do
         user <- withDb $ insertUnique (User fname lname)
@@ -47,3 +50,19 @@ main = do
           selectList ([UserFirstName ==. name] ||. [UserLastName ==. name])
                       [Asc UserFirstName, Asc UserLastName, OffsetBy offset, LimitTo limit]
         json users
+
+      -- TASKS
+      get ("task" <//> "new" <//> var <//> var) $ \(userId :: Int64) (title :: String) -> do
+        error "Implement task #1"
+
+      get ("task" <//> "by-user" <//> var) $ \(userId :: Int64) -> do
+        error "Implement task #2"
+
+      get ("task" <//> "all") $ do
+        error "Implement task #3"
+
+      get ("task" <//> "completed" <//> var) $ \(taskId :: Int64) -> do
+        error "Implement task #4"
+
+      get ("user" <//> "delete" <//> var) $ \(userId :: Int64) -> do
+        error "Implement task #5"
