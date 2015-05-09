@@ -1,0 +1,26 @@
+name:                p4-digestive
+version:             0.1.0.0
+synopsis:            LambdaConf 2015 Haskell web workshop - Part 4 - Digestive Functors
+homepage:            https://github.com/serras/lambdaconf-2015-web
+author:              Alejandro Serrano
+maintainer:          trupill@gmail.com
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable p4-digestive
+  main-is:             Main.hs
+  build-depends:       base >= 4 && < 5,
+                       Spock >= 0.7 && < 1,
+                       persistent >= 2.1 && < 3,
+                       persistent-template >= 2.1 && < 3,
+                       persistent-sqlite >= 2.1 && < 3,
+                       monad-logger >= 0.3 && < 0.4,
+                       text,
+                       transformers,
+                       blaze-html >= 0.8 && < 1,
+                       digestive-functors >= 0.7 && < 1,
+                       digestive-functors-blaze >= 0.6 && < 1,
+                       Spock-digestive,
+                       http-types
+  hs-source-dirs:      src
+  default-language:    Haskell2010
