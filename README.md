@@ -9,7 +9,7 @@
 3. [Database](https://github.com/serras/lambdaconf-2015-web/blob/master/ex3-db.md)
 4. [Esqueleto](https://github.com/serras/lambdaconf-2015-web/blob/master/ex4-esqueleto.md) (advanced)
 5. [Digestive Functors](https://github.com/serras/lambdaconf-2015-web/blob/master/ex5-digestive.md)
-6. [Digestive Functors + JSON](https://github.com/serras/lambdaconf-2015-web/blob/master/ex6-digestive-aeson.md)
+6. [Heroku](https://github.com/serras/lambdaconf-2015-web/blob/master/ex6-heroku.md)
 
 ### Running an exercise
 
