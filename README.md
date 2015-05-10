@@ -1,6 +1,6 @@
 # LambdaConf 2015 Haskell web workshop
 
-### [Slides](http://serras.github.io/lambdaconf-2015-slides/web-development/)
+### [Slides](https://docs.google.com/presentation/d/10m9zTl3Lir68VsT-yV_Ke-hvBBuq7Lj08WQ-yxElIKg/edit?usp=sharing)
 
 ### Exercises
 
