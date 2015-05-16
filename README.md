@@ -1,5 +1,13 @@
 # LambdaConf 2015 Haskell web workshop
 
+### Preparing for the workshop
+
+1. Install Haskell following the instructions of the [download](https://www.haskell.org/downloads) page.
+2. Open a terminal.
+3. Run `cabal update`.
+4. Run `cabal install Spock blaze-html shakespeare aeson stm persistent-template persistent-sqlite esqueleto digestive-functors-blaze Spock-digestive digestive-functors-aeson wai-middleware-static`.
+5. If you want to follow the deployment exercise, install [Heroku Toolbelt](https://toolbelt.heroku.com/).
+
 ### [Slides](https://docs.google.com/presentation/d/10m9zTl3Lir68VsT-yV_Ke-hvBBuq7Lj08WQ-yxElIKg/edit?usp=sharing)
 
 ### Exercises
