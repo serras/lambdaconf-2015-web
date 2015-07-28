@@ -53,9 +53,9 @@ For the second task it is quite probable that you had written a function, or a p
 
 ```haskell
 instance ToJSON Person where
-  toJSON (Person nm ag ad) = object [ "name"    .= name
-                                    , "age"     .= age
-                                    , "address" .= address
+  toJSON (Person nm ag ad) = object [ "name"    .= nm
+                                    , "age"     .= ag
+                                    , "address" .= ad
                                     ]
 ```
 
